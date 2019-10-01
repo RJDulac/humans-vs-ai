@@ -48,9 +48,9 @@
         <!-- Log Here-->
         <section v-if="turns.length > 0">
             <p class="text-2xl mt-8 text-center text-yellow-400 mb-3">Log</p>
-            <div class="text-center h-48 overflow-y-scroll max-h-1/2 mt-8 border-solid border-2 border-yellow-400 p-4 w-full rounded">
+            <div class="text-center h-64 overflow-y-scroll max-h-1/2 mt-8 border-solid border-2 border-yellow-400 p-4 w-full rounded">
                 <ul class="mb-4">
-                    <li v-for="turn in turns">{{ turn.text }}</li>
+                    <li v-for="turn in turns" :class="{'bg-blue-400 mt-2 p-2 text-white' :turn.isPlayer,'bg-red-400 mt-2 p-2 text-white' :!turn.isPlayer}">{{ turn.text }}</li>
                 </ul>
             </div>
         </section>
