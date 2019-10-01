@@ -37,7 +37,12 @@ new Vue({
         },
 
         specialAttack: function() {
-            this.aiHealth -= this.doDamage(5,10);
+            var damage = this.doDamage(5,10)
+            this.aiHealth -= damage;
+            this.turns.unshift({
+                isPlayer: true,
+                text: 'You hit the AI with your special attack for ' + damage
+            });
             if(this.checkWin()){
                 return;
             };
@@ -45,11 +50,16 @@ new Vue({
         },
         
         heal: function() {
+            var heals = this.doDamage(4,10)
             if(this.playerHealth <= 90) {
-                this.playerHealth += this.doDamage(4,10);
+                this.playerHealth += heals;
             } else {
                 this.playerHealth = 100;
             }
+            this.turns.unshift({
+                isPlayer: true,
+                text: 'You heal for ' + heals
+            });
             this.aiAttacks();
         },
 
