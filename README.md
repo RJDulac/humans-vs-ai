@@ -1,5 +1,5 @@
 # Humans vs AI
-This is a game I developed while watching a Udemy course while learning Vue.js. I decieded to open source the project for adding new features, and fixing potential bugs for $hacktober -- 
+This is a game I developed while watching a Udemy course while learning Vue.js. I decieded to open source the project for adding new features, and fixing potential bugs for #hacktober -- 
 
 Feel free to add new features, and bugs to the issues board. 
 
