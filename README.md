@@ -3,7 +3,7 @@ This is a game I developed while watching a Udemy course while learning Vue.js. 
 
 Feel free to add new features, and bugs to the issues board. 
 
-Interested in becoming a developer? Already a great developer and interested in helping others learn? So are we! Join our Discord server - https://discord.gg/nawvXTy ! 
+**Interested in becoming a developer? Already a great developer and interested in helping others learn? So are we! Join our Discord server** - https://discord.gg/nawvXTy ! 
 
 ### Rules : 
 1) If you are able to complete the task, submit a PR, and I will mark the task off the list.
