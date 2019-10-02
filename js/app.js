@@ -3,6 +3,8 @@ new Vue({
     data: {
         usedSpecial: false,
         usedHeal: false,
+        specialCount: 3,
+        healCount: 2,
         playerHealth: 100,
         aiHealth: 100,
         started: false,
@@ -51,28 +53,34 @@ new Vue({
         },
 
         specialAttack: function() {
-            if(this.usedSpecial == false){
+            if(this.usedSpecial == false && this.specialCount > 0){
+            this.specialCount -= 1;
             this.usedHeal = false;
             this.usedSpecial = true;
             var damage = this.doDamage(5,10)
             this.aiHealth -= damage;
             this.turns.unshift({
                 isPlayer: true,
-                text: 'You hit the AI with your special attack for ' + damage
+                text: 'You hit the AI with your special attack for ' + damage + ', you have ' + this.specialCount + ' left!'
             });
-            this.aiAttacks();} else{
+            this.aiAttacks();} else if(this.usedSpecial == true && this.specialCount > 0){
               this.turns.unshift({
                   isPlayer: true,
                   text: 'You need to recharge your special attack!'
               });
-            };
+            }else {
+                this.turns.unshift({
+                isPlayer: true,
+                text: 'You dont have any special attack left!'
+            });};
             if(this.checkWin()){
                 return;
             }
         },
 
         heal: function() {
-            if(this.usedHeal == false){
+            if(this.usedHeal == false && this.healCount > 0){
+            this.healCount -= 1;
             this.usedHeal = true;
             this.usedSpecial = false;
             var heals = this.doDamage(4,10)
@@ -83,14 +91,18 @@ new Vue({
             }
             this.turns.unshift({
                 isPlayer: true,
-                text: 'You heal for ' + heals
+                text: 'You heal for ' + heals + ', you have ' + this.healCount + ' left!'
             });
-            this.aiAttacks();} else{
+            this.aiAttacks();} else if (this.usedHeal == true && this.healCount > 0){
               this.turns.unshift({
                   isPlayer: true,
                   text: 'You need to recharge your healing!'
               })
-            }
+            } else{
+                this.turns.unshift({
+                isPlayer: true,
+                text: 'You dont have any healing left!'
+            });}
         },
 
         doDamage: function(min, max) {
