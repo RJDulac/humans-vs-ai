@@ -8,6 +8,7 @@ new Vue({
         playerHealth: 100,
         aiHealth: 100,
         started: false,
+        currentTurn: 0,
         turns: []
     },
     methods :{
@@ -23,16 +24,17 @@ new Vue({
             if (damage > 0){
             this.turns.unshift({
                 isPlayer: false,
-                text: 'AI hits you for ' + damage
+                text: 'Turn ' + this.currentTurn + ': AI hits you for ' + damage
             })} else{
             this.turns.unshift({
                 isPlayer: false,
-                text: 'AI missed!'
+                text: 'Turn ' + this.currentTurn + ': AI missed!'
             })};
             this.checkWin();
         },
 
         attack: function() {
+            this.currentTurn += 1;
             this.usedSpecial = false;
             this.usedHeal = false;
             var damage = this.doDamage(0,5)
@@ -40,11 +42,11 @@ new Vue({
             if (damage > 0){
             this.turns.unshift({
                 isPlayer: true,
-                text: 'You hit the AI for ' + damage
+                text: 'Turn ' + this.currentTurn + ': You hit the AI for ' + damage
             });} else {
             this.turns.unshift({
                 isPlayer: true,
-                text: 'You missed!'
+                text: 'Turn ' + this.currentTurn + ': You missed!'
               });};
             if(this.checkWin()){
                 return;
@@ -54,6 +56,7 @@ new Vue({
 
         specialAttack: function() {
             if(this.usedSpecial == false && this.specialCount > 0){
+            this.currentTurn += 1;
             this.specialCount -= 1;
             this.usedHeal = false;
             this.usedSpecial = true;
@@ -61,7 +64,7 @@ new Vue({
             this.aiHealth -= damage;
             this.turns.unshift({
                 isPlayer: true,
-                text: 'You hit the AI with your special attack for ' + damage + ', you have ' + this.specialCount + ' left!'
+                text: 'Turn ' + this.currentTurn + ': You hit the AI with your special attack for ' + damage + ', you have ' + this.specialCount + ' left!'
             });
             this.aiAttacks();} else if(this.usedSpecial == true && this.specialCount > 0){
               this.turns.unshift({
@@ -80,6 +83,7 @@ new Vue({
 
         heal: function() {
             if(this.usedHeal == false && this.healCount > 0){
+            this.currentTurn += 1;
             this.healCount -= 1;
             this.usedHeal = true;
             this.usedSpecial = false;
@@ -91,7 +95,7 @@ new Vue({
             }
             this.turns.unshift({
                 isPlayer: true,
-                text: 'You heal for ' + heals + ', you have ' + this.healCount + ' left!'
+                text: 'Turn ' + this.currentTurn + ': You heal for ' + heals + ', you have ' + this.healCount + ' left!'
             });
             this.aiAttacks();} else if (this.usedHeal == true && this.healCount > 0){
               this.turns.unshift({
