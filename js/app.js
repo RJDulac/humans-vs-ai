@@ -18,10 +18,15 @@ new Vue({
         aiAttacks: function(){
             var damage = this.doDamage(0,7)
             this.playerHealth -= damage;
+            if (damage > 0){
             this.turns.unshift({
                 isPlayer: false,
                 text: 'AI hits you for ' + damage
-            });
+            })} else{
+            this.turns.unshift({
+                isPlayer: false,
+                text: 'AI missed!'
+            })};
             this.checkWin();
         },
 
@@ -30,10 +35,15 @@ new Vue({
             this.usedHeal = false;
             var damage = this.doDamage(0,5)
             this.aiHealth -= damage;
+            if (damage > 0){
             this.turns.unshift({
                 isPlayer: true,
                 text: 'You hit the AI for ' + damage
-            });
+            });} else {
+            this.turns.unshift({
+                isPlayer: true,
+                text: 'You missed!'
+              });};
             if(this.checkWin()){
                 return;
             };
@@ -84,7 +94,7 @@ new Vue({
         },
 
         doDamage: function(min, max) {
-            return Math.max( Math.floor( Math.random()  * max ) + 1, min);
+            return Math.max( Math.floor( Math.random()  * max ), min);
         },
 
         checkWin: function(){
