@@ -1,6 +1,8 @@
 new Vue({
     el: "#app",
     data: {
+        usedSpecial: false,
+        usedHeal: false,
         playerHealth: 100,
         aiHealth: 100,
         started: false,
@@ -24,6 +26,8 @@ new Vue({
         },
 
         attack: function() {
+            this.usedSpecial = false;
+            this.usedHeal = false;
             var damage = this.doDamage(0,5)
             this.aiHealth -= damage;
             this.turns.unshift({
@@ -37,19 +41,30 @@ new Vue({
         },
 
         specialAttack: function() {
+            if(this.usedSpecial == false){
+            this.usedHeal = false;
+            this.usedSpecial = true;
             var damage = this.doDamage(5,10)
             this.aiHealth -= damage;
             this.turns.unshift({
                 isPlayer: true,
                 text: 'You hit the AI with your special attack for ' + damage
             });
+            this.aiAttacks();} else{
+              this.turns.unshift({
+                  isPlayer: true,
+                  text: 'You need to recharge your special attack!'
+              });
+            };
             if(this.checkWin()){
                 return;
-            };
-            this.aiAttacks();
+            }
         },
-        
+
         heal: function() {
+            if(this.usedHeal == false){
+            this.usedHeal = true;
+            this.usedSpecial = false;
             var heals = this.doDamage(4,10)
             if(this.playerHealth <= 90) {
                 this.playerHealth += heals;
@@ -60,7 +75,12 @@ new Vue({
                 isPlayer: true,
                 text: 'You heal for ' + heals
             });
-            this.aiAttacks();
+            this.aiAttacks();} else{
+              this.turns.unshift({
+                  isPlayer: true,
+                  text: 'You need to recharge your healing!'
+              })
+            }
         },
 
         doDamage: function(min, max) {
@@ -75,7 +95,7 @@ new Vue({
                     this.started = false;
                 }
                 return true;
-                
+
             } else if (this.playerHealth<=0) {
                 if(confirm('You lost. New Game?')){
                     this.startGame()
@@ -86,6 +106,6 @@ new Vue({
             }
             return false;
         },
-        
+
     }
 })
