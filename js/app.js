@@ -1,12 +1,9 @@
 new Vue({
   el: "#app",
   data: {
-    usedSpecial: false,
-    usedHeal: false,
-    specialCount: 3,
-    healCount: 2,
     playerHealth: 100,
     aiHealth: 100,
+    playerMana: 100,
     started: false,
     currentTurn: 0,
     gold: 300,
@@ -17,19 +14,22 @@ new Vue({
   methods: {
     startGame: function () {
       this.rewardGold();
-
       this.playerHealth = 100;
       this.aiHealth = 100;
+      this.playerMana = 100;
       this.started = true;
       this.turns = [];
       this.currentTurn = 0;
-      this.specialCount = 3;
-      this.healCount = 2;
       this.totalDamage = 0;
 
 
     },
+<<<<<<< HEAD
     aiAttacks: function () {
+=======
+
+    aiAttacks: function() {
+>>>>>>> 50fc2baa96eb1d2f1564d3e28dde4d48e90387da
       var damage = this.doDamage(0, 7);
       this.playerHealth -= damage;
       if (damage > 0) {
@@ -75,20 +75,26 @@ new Vue({
       }
       this.aiAttacks();
     },
+<<<<<<< HEAD
     attackName: function () {
+=======
+
+    attackName: function() {
+>>>>>>> 50fc2baa96eb1d2f1564d3e28dde4d48e90387da
       const attackNames = ["scratches", "bites", "claws"];
-
       const randomNum = Math.floor(Math.random() * attackNames.length);
-
       return attackNames[randomNum];
     },
 
+<<<<<<< HEAD
     specialAttack: function () {
       if (this.usedSpecial == false && this.specialCount > 0) {
+=======
+    specialAttack: function() {
+      if (this.playerMana >= 20) {
+>>>>>>> 50fc2baa96eb1d2f1564d3e28dde4d48e90387da
         this.currentTurn += 1;
-        this.specialCount -= 1;
-        this.usedHeal = false;
-        this.usedSpecial = true;
+        this.playerMana = this.playerMana - 20;
         var damage = this.doDamage(5, 10);
         this.aiHealth -= damage;
         this.turns.unshift({
@@ -97,21 +103,13 @@ new Vue({
             "Turn " +
             this.currentTurn +
             ": You hit the AI with your special attack for " +
-            damage +
-            ", you have " +
-            this.specialCount +
-            " left!"
+            damage
         });
         this.aiAttacks();
-      } else if (this.usedSpecial == true && this.specialCount > 0) {
-        this.turns.unshift({
-          isPlayer: true,
-          text: "You need to recharge your special attack!"
-        });
       } else {
         this.turns.unshift({
           isPlayer: true,
-          text: "You dont have any special attack left!"
+          text: "You don't have enough mana for that attack."
         });
       }
       if (this.checkWin()) {
@@ -119,12 +117,15 @@ new Vue({
       }
     },
 
+<<<<<<< HEAD
     heal: function () {
       if (this.usedHeal == false && this.healCount > 0) {
+=======
+    heal: function() {
+      if (this.playerMana >= 10) {
+>>>>>>> 50fc2baa96eb1d2f1564d3e28dde4d48e90387da
         this.currentTurn += 1;
-        this.healCount -= 1;
-        this.usedHeal = true;
-        this.usedSpecial = false;
+        this.playerMana = this.playerMana - 10;
         var heals = this.doDamage(4, 10);
         if (this.playerHealth <= 90) {
           this.playerHealth += heals;
@@ -137,21 +138,13 @@ new Vue({
             "Turn " +
             this.currentTurn +
             ": You heal for " +
-            heals +
-            ", you have " +
-            this.healCount +
-            " left!"
+            heals + "."
         });
         this.aiAttacks();
-      } else if (this.usedHeal == true && this.healCount > 0) {
-        this.turns.unshift({
-          isPlayer: true,
-          text: "You need to recharge your healing!"
-        });
       } else {
         this.turns.unshift({
           isPlayer: true,
-          text: "You dont have any healing left!"
+          text: "You dont have enough mana to heal!"
         });
       }
     },
@@ -161,6 +154,7 @@ new Vue({
         if (this.playerHealth <= 90) {
           this.potionCount = this.potionCount - 1;
           this.playerHealth = this.playerHealth + 10;
+          this.aiAttacks();
           this.turns.unshift({
             isPlayer: true,
             text: "Turn " + this.currentTurn + ": You used a potion."
@@ -182,10 +176,19 @@ new Vue({
         this.gold -= 75;
       }
     },
+<<<<<<< HEAD
     rewardGold: function () {
       this.gold += this.totalDamage;
     },
     deathPenality: function () {
+=======
+
+    rewardGold: function() {
+      this.gold += this.totalDamage;
+    },
+
+    deathPenality: function() {
+>>>>>>> 50fc2baa96eb1d2f1564d3e28dde4d48e90387da
       let percent = 0.25 * this.gold;
 
       this.gold -= Math.floor(percent);
@@ -194,7 +197,12 @@ new Vue({
     doDamage: function (min, max) {
       return Math.max(Math.floor(Math.random() * max), min);
     },
+<<<<<<< HEAD
     giveUp: function () {
+=======
+
+    giveUp: function() {
+>>>>>>> 50fc2baa96eb1d2f1564d3e28dde4d48e90387da
       if (confirm("You Give UP. New Game?")) {
         this.started = false;
         this.deathPenality();
