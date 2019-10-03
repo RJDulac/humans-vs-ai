@@ -160,7 +160,10 @@ new Vue({
     },
     rewardGold: function() {
       this.gold += this.totalDamage;
-      console.log("called");
+    },
+    deathPenality: function() {
+      let percent = 0.25 * this.gold;
+      this.gold -= percent;
     },
 
     doDamage: function(min, max) {
@@ -176,6 +179,7 @@ new Vue({
         }
         return true;
       } else if (this.playerHealth <= 0) {
+        this.deathPenality();
         if (confirm("You lost. New Game?")) {
           this.startGame();
         } else {
