@@ -14,7 +14,7 @@
 <body>
     <div id="app">
         <div class="h-full">
-            <p class="md:text-4xl sm:text-2xl text-center">Human vs AI</p>
+            <p class="text-4xl text-center">Human vs AI</p>
 
             <!-- Class name / Health bars here -->
             <div class="flex flex-wrap justify-center mt-4">
@@ -34,7 +34,7 @@
 
             <!-- Mana Here-->
             <div class="flex flex-wrap justify-center mt-6">
-                <div class="w-96 mt-12 justify-center mx-4 block">
+                <div class="w-96 sm:mt-6 md:mt-12 justify-center mx-4 block">
                     <p class="text-2xl text-center">Mana:</p>
                     <div class="border-green-400 border-solid border-2 rounded">
                         <div class="text-center text-white py-3 bg-green-400" :style="{ width: playerMana + '%' }">{{ playerMana }}</div>
@@ -43,7 +43,7 @@
             </div>
 
             <!-- Stats Here -->
-            <div class="flex justify-center">
+            <div class="flex flex-wrap justify-center">
                 <p class="text-yellow-400 mx-2 text-2xl text-center mt-12"> Gold :  {{ this.gold }}</p>
                 <p class="text-red-400 mx-2 text-2xl text-center mt-12"> Total Damage :  {{ this.totalDamage }}</p>
             </div>
