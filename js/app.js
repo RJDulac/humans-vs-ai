@@ -148,7 +148,7 @@ new Vue({
 
     //turn into store later?
     buyPotion: function() {
-      if (this.gold !== 0) {
+      if (!this.gold <= 0) {
         this.potionCount += 1;
         this.gold -= 75;
       }
