@@ -14,7 +14,6 @@
 <body>
     <div id="app">
         <div class="h-full">
-            <p class="text-yellow-400"> Gold :  {{ this.gold }}</p>
             <p class="text-6xl text-center">Human vs AI</p>
             <!-- Class name / Health bars here -->
             <div class="flex flex-wrap justify-center mt-4">
@@ -32,12 +31,13 @@
                 </div>
             </div>
 
+            <p class="text-yellow-400 text-2xl text-center mt-12"> Gold :  {{ this.gold }}</p>
+
             <!-- Buttons Here -->
             <div class="flex flex-wrap justify-center mt-12 items-center">
                 <template v-if="!started">
                     <button class="p-4 m-2 bg-blue-600 text-white rounded" @click="startGame() ">Start New Game</button>
-                    <button class="p-4 m-2 bg-blue-600 text-white rounded" @click="buyPotion() ">Buy Potion</button>
-
+                    <button class="p-4 m-2 bg-green-600 text-white rounded" @click="buyPotion() ">Buy Potion</button>
                 </template>
                 <template v-else>
                     <button class="p-4 m-2 rounded text-white bg-red-400" @click="attack()">Attack</button>
