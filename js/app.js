@@ -17,6 +17,7 @@ new Vue({
             this.aiHealth = 100;
             this.started = true;
             this.turns = [];
+            this.currentTurn = 0;
         },
         aiAttacks: function(){
             var damage = this.doDamage(0,7)
