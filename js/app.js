@@ -4,11 +4,12 @@ new Vue({
     usedSpecial: false,
     usedHeal: false,
     specialCount: 3,
-    healCount: 2,
+    healCount: 0,
     playerHealth: 100,
     aiHealth: 100,
     started: false,
     currentTurn: 0,
+    gold: 300,
     turns: []
   },
   methods: {
@@ -19,7 +20,6 @@ new Vue({
       this.turns = [];
       this.currentTurn = 0;
       this.specialCount = 3;
-      this.healCount = 2;
     },
     aiAttacks: function() {
       var damage = this.doDamage(0, 7);
@@ -145,6 +145,16 @@ new Vue({
           text: "You dont have any healing left!"
         });
       }
+    },
+    //turn into store later?
+    buyPotion: function() {
+      if (this.gold !== 0) {
+        this.healCount += 1;
+        this.gold -= 75;
+      }
+
+      console.log(this.healCount);
+      console.log(this.gold);
     },
 
     doDamage: function(min, max) {
