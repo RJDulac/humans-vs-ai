@@ -67,8 +67,10 @@ new Vue({
       this.aiAttacks();
     },
     attackName: function() {
-      attackNames = ["scratches", "bites", "claws"];
-      randomNum = Math.floor(Math.random() * this.attackName.length);
+      const attackNames = ["scratches", "bites", "claws"];
+
+      const randomNum = Math.floor(Math.random() * attackNames.length);
+
       return attackNames[randomNum];
     },
 
