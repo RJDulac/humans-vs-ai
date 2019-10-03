@@ -22,7 +22,7 @@ new Vue({
       this.currentTurn = 0;
       this.totalDamage = 0;
     },
-    
+
     aiAttacks: function() {
       var damage = this.doDamage(0, 7);
       this.playerHealth -= damage;
@@ -134,6 +134,7 @@ new Vue({
         if (this.playerHealth <= 90) {
           this.potionCount = this.potionCount - 1;
           this.playerHealth = this.playerHealth + 10;
+          this.aiAttacks();
           this.turns.unshift({
             isPlayer: true,
             text: "Turn " + this.currentTurn + ": You used a potion."
@@ -153,9 +154,11 @@ new Vue({
         this.gold -= 75;
       }
     },
+
     rewardGold: function() {
       this.gold += this.totalDamage;
     },
+
     deathPenality: function() {
       let percent = 0.25 * this.gold;
       this.gold -= percent;
@@ -164,6 +167,7 @@ new Vue({
     doDamage: function(min, max) {
       return Math.max(Math.floor(Math.random() * max), min);
     },
+
     giveUp: function() {
       if (confirm("You Give UP. New Game?")) {
         this.started = false;
