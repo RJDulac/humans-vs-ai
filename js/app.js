@@ -24,12 +24,7 @@ new Vue({
 
 
     },
-<<<<<<< HEAD
     aiAttacks: function () {
-=======
-
-    aiAttacks: function() {
->>>>>>> 50fc2baa96eb1d2f1564d3e28dde4d48e90387da
       var damage = this.doDamage(0, 7);
       this.playerHealth -= damage;
       if (damage > 0) {
@@ -75,24 +70,14 @@ new Vue({
       }
       this.aiAttacks();
     },
-<<<<<<< HEAD
     attackName: function () {
-=======
-
-    attackName: function() {
->>>>>>> 50fc2baa96eb1d2f1564d3e28dde4d48e90387da
       const attackNames = ["scratches", "bites", "claws"];
       const randomNum = Math.floor(Math.random() * attackNames.length);
       return attackNames[randomNum];
     },
 
-<<<<<<< HEAD
     specialAttack: function () {
       if (this.usedSpecial == false && this.specialCount > 0) {
-=======
-    specialAttack: function() {
-      if (this.playerMana >= 20) {
->>>>>>> 50fc2baa96eb1d2f1564d3e28dde4d48e90387da
         this.currentTurn += 1;
         this.playerMana = this.playerMana - 20;
         var damage = this.doDamage(5, 10);
@@ -117,13 +102,8 @@ new Vue({
       }
     },
 
-<<<<<<< HEAD
     heal: function () {
       if (this.usedHeal == false && this.healCount > 0) {
-=======
-    heal: function() {
-      if (this.playerMana >= 10) {
->>>>>>> 50fc2baa96eb1d2f1564d3e28dde4d48e90387da
         this.currentTurn += 1;
         this.playerMana = this.playerMana - 10;
         var heals = this.doDamage(4, 10);
@@ -176,19 +156,10 @@ new Vue({
         this.gold -= 75;
       }
     },
-<<<<<<< HEAD
     rewardGold: function () {
       this.gold += this.totalDamage;
     },
     deathPenality: function () {
-=======
-
-    rewardGold: function() {
-      this.gold += this.totalDamage;
-    },
-
-    deathPenality: function() {
->>>>>>> 50fc2baa96eb1d2f1564d3e28dde4d48e90387da
       let percent = 0.25 * this.gold;
 
       this.gold -= Math.floor(percent);
@@ -197,12 +168,7 @@ new Vue({
     doDamage: function (min, max) {
       return Math.max(Math.floor(Math.random() * max), min);
     },
-<<<<<<< HEAD
     giveUp: function () {
-=======
-
-    giveUp: function() {
->>>>>>> 50fc2baa96eb1d2f1564d3e28dde4d48e90387da
       if (confirm("You Give UP. New Game?")) {
         this.started = false;
         this.deathPenality();
