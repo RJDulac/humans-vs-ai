@@ -22,6 +22,7 @@ new Vue({
       this.currentTurn = 0;
       this.totalDamage = 0;
     },
+    
     aiAttacks: function() {
       var damage = this.doDamage(0, 7);
       this.playerHealth -= damage;
@@ -71,9 +72,7 @@ new Vue({
 
     attackName: function() {
       const attackNames = ["scratches", "bites", "claws"];
-
       const randomNum = Math.floor(Math.random() * attackNames.length);
-
       return attackNames[randomNum];
     },
 
