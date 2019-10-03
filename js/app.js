@@ -12,7 +12,7 @@ new Vue({
     turns: []
   },
   methods: {
-    startGame: function() {
+    startGame: function () {
       this.rewardGold();
       this.playerHealth = 100;
       this.aiHealth = 100;
@@ -21,9 +21,15 @@ new Vue({
       this.turns = [];
       this.currentTurn = 0;
       this.totalDamage = 0;
+
+
     },
+<<<<<<< HEAD
+    aiAttacks: function () {
+=======
 
     aiAttacks: function() {
+>>>>>>> 50fc2baa96eb1d2f1564d3e28dde4d48e90387da
       var damage = this.doDamage(0, 7);
       this.playerHealth -= damage;
       if (damage > 0) {
@@ -46,7 +52,7 @@ new Vue({
       this.checkWin();
     },
 
-    attack: function() {
+    attack: function () {
       this.currentTurn += 1;
       this.usedSpecial = false;
       this.usedHeal = false;
@@ -69,15 +75,24 @@ new Vue({
       }
       this.aiAttacks();
     },
+<<<<<<< HEAD
+    attackName: function () {
+=======
 
     attackName: function() {
+>>>>>>> 50fc2baa96eb1d2f1564d3e28dde4d48e90387da
       const attackNames = ["scratches", "bites", "claws"];
       const randomNum = Math.floor(Math.random() * attackNames.length);
       return attackNames[randomNum];
     },
 
+<<<<<<< HEAD
+    specialAttack: function () {
+      if (this.usedSpecial == false && this.specialCount > 0) {
+=======
     specialAttack: function() {
       if (this.playerMana >= 20) {
+>>>>>>> 50fc2baa96eb1d2f1564d3e28dde4d48e90387da
         this.currentTurn += 1;
         this.playerMana = this.playerMana - 20;
         var damage = this.doDamage(5, 10);
@@ -102,8 +117,13 @@ new Vue({
       }
     },
 
+<<<<<<< HEAD
+    heal: function () {
+      if (this.usedHeal == false && this.healCount > 0) {
+=======
     heal: function() {
       if (this.playerMana >= 10) {
+>>>>>>> 50fc2baa96eb1d2f1564d3e28dde4d48e90387da
         this.currentTurn += 1;
         this.playerMana = this.playerMana - 10;
         var heals = this.doDamage(4, 10);
@@ -129,7 +149,7 @@ new Vue({
       }
     },
 
-    usePotion: function() {
+    usePotion: function () {
       if (this.potionCount > 0) {
         if (this.playerHealth <= 90) {
           this.potionCount = this.potionCount - 1;
@@ -148,7 +168,7 @@ new Vue({
     },
 
     //turn into store later?
-    buyPotion: function() {
+    buyPotion: function () {
       if (this.gold <= 74) {
         return;
       } else {
@@ -156,21 +176,33 @@ new Vue({
         this.gold -= 75;
       }
     },
+<<<<<<< HEAD
+    rewardGold: function () {
+      this.gold += this.totalDamage;
+    },
+    deathPenality: function () {
+=======
 
     rewardGold: function() {
       this.gold += this.totalDamage;
     },
 
     deathPenality: function() {
+>>>>>>> 50fc2baa96eb1d2f1564d3e28dde4d48e90387da
       let percent = 0.25 * this.gold;
-      this.gold -= percent;
+
+      this.gold -= Math.floor(percent);
     },
 
-    doDamage: function(min, max) {
+    doDamage: function (min, max) {
       return Math.max(Math.floor(Math.random() * max), min);
     },
+<<<<<<< HEAD
+    giveUp: function () {
+=======
 
     giveUp: function() {
+>>>>>>> 50fc2baa96eb1d2f1564d3e28dde4d48e90387da
       if (confirm("You Give UP. New Game?")) {
         this.started = false;
         this.deathPenality();
@@ -180,7 +212,7 @@ new Vue({
       }
     },
 
-    checkWin: function() {
+    checkWin: function () {
       if (this.aiHealth <= 0) {
         if (confirm("You Won! New Game?")) {
           this.startGame();
