@@ -1,12 +1,9 @@
 new Vue({
   el: "#app",
   data: {
-    usedSpecial: false,
-    usedHeal: false,
-    specialCount: 3,
-    healCount: 2,
     playerHealth: 100,
     aiHealth: 100,
+    playerMana: 100,
     started: false,
     currentTurn: 0,
     gold: 300,
@@ -17,14 +14,12 @@ new Vue({
   methods: {
     startGame: function() {
       this.rewardGold();
-
       this.playerHealth = 100;
       this.aiHealth = 100;
+      this.playerMana = 100;
       this.started = true;
       this.turns = [];
       this.currentTurn = 0;
-      this.specialCount = 3;
-      this.healCount = 2;
       this.totalDamage = 0;
     },
     aiAttacks: function() {
@@ -73,6 +68,7 @@ new Vue({
       }
       this.aiAttacks();
     },
+
     attackName: function() {
       const attackNames = ["scratches", "bites", "claws"];
 
@@ -82,11 +78,9 @@ new Vue({
     },
 
     specialAttack: function() {
-      if (this.usedSpecial == false && this.specialCount > 0) {
+      if (this.playerMana >= 20) {
         this.currentTurn += 1;
-        this.specialCount -= 1;
-        this.usedHeal = false;
-        this.usedSpecial = true;
+        this.playerMana = this.playerMana - 20;
         var damage = this.doDamage(5, 10);
         this.aiHealth -= damage;
         this.turns.unshift({
@@ -95,21 +89,13 @@ new Vue({
             "Turn " +
             this.currentTurn +
             ": You hit the AI with your special attack for " +
-            damage +
-            ", you have " +
-            this.specialCount +
-            " left!"
+            damage
         });
         this.aiAttacks();
-      } else if (this.usedSpecial == true && this.specialCount > 0) {
-        this.turns.unshift({
-          isPlayer: true,
-          text: "You need to recharge your special attack!"
-        });
       } else {
         this.turns.unshift({
           isPlayer: true,
-          text: "You dont have any special attack left!"
+          text: "You don't have enough mana for that attack."
         });
       }
       if (this.checkWin()) {
@@ -118,11 +104,9 @@ new Vue({
     },
 
     heal: function() {
-      if (this.usedHeal == false && this.healCount > 0) {
+      if (this.playerMana >= 10) {
         this.currentTurn += 1;
-        this.healCount -= 1;
-        this.usedHeal = true;
-        this.usedSpecial = false;
+        this.playerMana = this.playerMana - 10;
         var heals = this.doDamage(4, 10);
         if (this.playerHealth <= 90) {
           this.playerHealth += heals;
@@ -135,21 +119,13 @@ new Vue({
             "Turn " +
             this.currentTurn +
             ": You heal for " +
-            heals +
-            ", you have " +
-            this.healCount +
-            " left!"
+            heals + "."
         });
         this.aiAttacks();
-      } else if (this.usedHeal == true && this.healCount > 0) {
-        this.turns.unshift({
-          isPlayer: true,
-          text: "You need to recharge your healing!"
-        });
       } else {
         this.turns.unshift({
           isPlayer: true,
-          text: "You dont have any healing left!"
+          text: "You dont have enough mana to heal!"
         });
       }
     },
