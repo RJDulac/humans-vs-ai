@@ -159,6 +159,13 @@ new Vue({
         if(this.playerHealth <= 90){
           this.potionCount = this.potionCount - 1;
           this.playerHealth = this.playerHealth + 10;
+          this.turns.unshift({
+            isPlayer: true,
+            text:
+              "Turn " + this.currentTurn + ": You used a potion."
+          });
+        } else {
+          alert("You have too much health.");
         }
       } else {
         alert("You don't have any potions");
