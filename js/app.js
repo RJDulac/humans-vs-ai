@@ -130,15 +130,14 @@ new Vue({
       }
     },
 
-    usePotion: function(){
-      if(this.potionCount > 0){
-        if(this.playerHealth <= 90){
+    usePotion: function() {
+      if (this.potionCount > 0) {
+        if (this.playerHealth <= 90) {
           this.potionCount = this.potionCount - 1;
           this.playerHealth = this.playerHealth + 10;
           this.turns.unshift({
             isPlayer: true,
-            text:
-              "Turn " + this.currentTurn + ": You used a potion."
+            text: "Turn " + this.currentTurn + ": You used a potion."
           });
         } else {
           alert("You have too much health.");
@@ -165,6 +164,14 @@ new Vue({
 
     doDamage: function(min, max) {
       return Math.max(Math.floor(Math.random() * max), min);
+    },
+    giveUp: function() {
+      if (confirm("You Give UP. New Game?")) {
+        this.started = false;
+        this.deathPenality();
+      } else {
+        this.started = true;
+      }
     },
 
     checkWin: function() {
