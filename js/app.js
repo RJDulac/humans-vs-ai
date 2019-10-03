@@ -4,12 +4,13 @@ new Vue({
     usedSpecial: false,
     usedHeal: false,
     specialCount: 3,
-    healCount: 0,
+    healCount: 2,
     playerHealth: 100,
     aiHealth: 100,
     started: false,
     currentTurn: 0,
     gold: 300,
+    potionCount: 0,
     totalDamage: 0,
     turns: []
   },
@@ -23,6 +24,7 @@ new Vue({
       this.turns = [];
       this.currentTurn = 0;
       this.specialCount = 3;
+      this.healCount = 2;
       this.totalDamage = 0;
     },
     aiAttacks: function() {
@@ -151,10 +153,30 @@ new Vue({
         });
       }
     },
+
+    usePotion: function(){
+      if(this.potionCount > 0){
+        if(this.playerHealth <= 90){
+          this.potionCount = this.potionCount - 1;
+          this.playerHealth = this.playerHealth + 10;
+          this.turns.unshift({
+            isPlayer: true,
+            text:
+              "Turn " + this.currentTurn + ": You used a potion."
+          });
+        } else {
+          alert("You have too much health.");
+        }
+      } else {
+        alert("You don't have any potions");
+      }
+    },
+
     //turn into store later?
     buyPotion: function() {
-      if (!this.gold <= 0) {
-        this.healCount += 1;
+
+      if (this.gold !== 0) {
+        this.potionCount += 1;
         this.gold -= 75;
       }
     },

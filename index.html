@@ -14,11 +14,10 @@
 <body>
     <div id="app">
         <div class="h-full">
-            <p class="text-yellow-400"> Gold :  {{ this.gold }}</p>
             <p class="text-6xl text-center">Human vs AI</p>
+
             <!-- Class name / Health bars here -->
             <div class="flex flex-wrap justify-center mt-4">
-                <p class="text-red-400"> Total Damage :  {{ this.totalDamage }}</p>
                 <div class="w-96 mx-4 block">
                     <p class="text-5xl text-center uppercase">Human</p>
                     <div class="w-full border-blue-400 border-solid border-2 rounded">
@@ -33,17 +32,23 @@
                 </div>
             </div>
 
+            <!-- Stats Here -->
+            <div class="flex justify-center">
+                <p class="text-yellow-400 mx-2 text-2xl text-center mt-12"> Gold :  {{ this.gold }}</p>
+                <p class="text-red-400 mx-2 text-2xl text-center mt-12"> Total Damage :  {{ this.totalDamage }}</p>
+            </div>
+
             <!-- Buttons Here -->
             <div class="flex flex-wrap justify-center mt-12 items-center">
                 <template v-if="!started">
                     <button class="p-4 m-2 bg-blue-600 text-white rounded" @click="startGame() ">Start New Game</button>
-                    <button class="p-4 m-2 bg-blue-600 text-white rounded" @click="buyPotion() ">Buy Potion</button>
-
+                    <button class="p-4 m-2 bg-green-600 text-white rounded" @click="buyPotion() ">Buy Potion</button>
                 </template>
                 <template v-else>
                     <button class="p-4 m-2 rounded text-white bg-red-400" @click="attack()">Attack</button>
                     <button class="p-4 m-2 rounded text-white bg-orange-400" @click="specialAttack()">Special Attack</button>
                     <button class="p-4 m-2 rounded text-white bg-green-400"@click="heal()">Heal</button>
+                    <button class="p-4 m-2 rounded text-white bg-blue-400"@click="usePotion()">Use Potion ( {{ potionCount }} )</button>
                     <button class="p-4 m-2 rounded text-black bg-gray-400" @click="started = !started">Give Up</button>
                 </template>
             </div>
@@ -57,7 +62,7 @@
                     </ul>
                 </div>
             </section>
-            <p class="text-blue-400 mt-8 text-center">Submit bugs / features to our <a style="color:#97C475;" href="https://github.com/karlm89/humans-vs-ai/issues" target="_blank">Github</a>.</p>
+            <p class="text-blue-400 mt-8 text-center">Submit bugs / features to our <a style="color:#97C475;" href="https://github.com/Humans-V-AI/humans-vs-ai/issues" target="_blank">Github</a>.</p>
         </div>
     </div>
 
