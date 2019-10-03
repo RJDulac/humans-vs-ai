@@ -10,16 +10,20 @@ new Vue({
     started: false,
     currentTurn: 0,
     gold: 300,
+    totalDamage: 0,
     turns: []
   },
   methods: {
     startGame: function() {
+      this.rewardGold();
+
       this.playerHealth = 100;
       this.aiHealth = 100;
       this.started = true;
       this.turns = [];
       this.currentTurn = 0;
       this.specialCount = 3;
+      this.totalDamage = 0;
     },
     aiAttacks: function() {
       var damage = this.doDamage(0, 7);
@@ -50,6 +54,7 @@ new Vue({
       this.usedHeal = false;
       var damage = this.doDamage(0, 5);
       this.aiHealth -= damage;
+      this.totalDamage += damage;
       if (damage > 0) {
         this.turns.unshift({
           isPlayer: true,
@@ -152,9 +157,10 @@ new Vue({
         this.healCount += 1;
         this.gold -= 75;
       }
-
-      console.log(this.healCount);
-      console.log(this.gold);
+    },
+    rewardGold: function() {
+      this.gold += this.totalDamage;
+      console.log("called");
     },
 
     doDamage: function(min, max) {
