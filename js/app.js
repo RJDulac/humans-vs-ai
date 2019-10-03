@@ -174,6 +174,7 @@ new Vue({
       if (confirm("You Give UP. New Game?")) {
         this.started = false;
         this.deathPenality();
+        this.totalDamage = 0;
       } else {
         this.started = true;
       }
