@@ -77,7 +77,7 @@ new Vue({
     },
 
     specialAttack: function () {
-      if (this.usedSpecial == false && this.specialCount > 0) {
+      if (this.playerMana >= 20) {
         this.currentTurn += 1;
         this.playerMana = this.playerMana - 20;
         var damage = this.doDamage(5, 10);
@@ -103,7 +103,7 @@ new Vue({
     },
 
     heal: function () {
-      if (this.usedHeal == false && this.healCount > 0) {
+      if (this.playerMana >= 10) {
         this.currentTurn += 1;
         this.playerMana = this.playerMana - 10;
         var heals = this.doDamage(4, 10);
